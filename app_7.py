@@ -135,7 +135,7 @@ if question := st.chat_input("What's up?"):
 
     # Generate the answer by calling OpenAI's Chat Model
     inputs = RunnableMap({
-        'context': lambda x: retriever.get_relevant_documents(x['question']),
+        'context': lambda x: retriever.invoke(x['question']),
         'question': lambda x: x['question']
     })
     chain = inputs | prompt | chat_model

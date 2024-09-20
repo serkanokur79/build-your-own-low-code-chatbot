@@ -1,16 +1,15 @@
-# Build your own RAG Chatbot
-Welcome to this workshop to build and deploy your own Chatbot using Retrieval Augmented Generation with Astra DB and the OpenAI Chat Model.
-
-It leverages [DataStax RAGStack](https://docs.datastax.com/en/ragstack/docs/index.html), which is a curated stack of the best open-source software for easing implementation of the RAG pattern in production-ready applications that use Astra Vector DB or Apache Cassandra as a vector store.
+# Build Your Own RAG Chatbot
+Welcome to this workshop to build and deploy your own chatbot using Retrieval Augmented Generation with Astra DB and the OpenAI Chat Model.
 
 ![codespace](./assets/chatbot.png)
 
 What you'll learn:
 - 🤩 How to leverage [DataStax RAGStack](https://docs.datastax.com/en/ragstack/docs/index.html) for production-ready use of the following components:
-    - 🚀 The [Astra DB Vector Store](https://db.new) for Semantic Similarity search
+    - 🚀 The [Astra DB Vector Store](https://db.new) for semantic similarity search
     - 🦜🔗 [LangChain](https://www.langchain.com) for linking OpenAI and Astra DB
-- 🤖 How to use [OpenAI's Large Language Models](https://platform.openai.com/docs/models) for Q&A style chatbots
+- 🤖 How to use [OpenAI's Large Language Models](https://platform.openai.com/docs/models) for Q&A-style chatbots
 - 👑 How to use [Streamlit](https://streamlit.io) to easily deploy your awesome app to the internet for everyone to see!
+- 🎉 How to use [Langflow](https://www.datastax.com/products/langflow). Simplify RAG and multi-agent application development with Langflow’s drag-and-drop IDE, rapid development, and one-click deployment at scale.
 
 - Slides of the presentation can be found [HERE](assets/meetups-slides.pdf)
 
@@ -26,12 +25,12 @@ During the course, you'll gain access to the following by signing up for free:
 2. [OpenAI account](https://platform.openai.com/signup) (you can sign up through your Github account)
 3. [Streamlit](https://streamlit.io) to deploy your amazing app (you can sign up through your Github account)
 
-Follow the below steps and provide the **Astra DB API Endpoint**, **Astra DB ApplicationToken** and **OpenAI API Key** when required.
+Follow the steps below and provide the **Astra DB API Endpoint**, **Astra DB Application Token**, and **OpenAI API Key** when required.
 
 ### Sign up for Astra DB
 Make sure you have a vector-capable Astra database (get one for free at [astra.datastax.com](https://astra.datastax.com))
-- You will be asked to provide the **API Endpoint** which can be found in the right pane underneath *Database details*.
-- Ensure you have an **Application Token** for your database which can be created in the right pane underneath *Database details*.
+- You will be asked to provide the **API Endpoint**, which can be found in the right pane under *Database details*.
+- Ensure you have an **Application Token** for your database, which can be created in the right pane under *Database details*.
 
 ![codespace](./assets/astra.png)
 
@@ -49,7 +48,7 @@ Follow the steps outlined [here](https://docs.streamlit.io/streamlit-community-c
 ## 2️⃣ First try the concepts in a Colab Notebook
 To kick this workshop off, we'll first try the concepts in a [Colab Notebook](https://colab.research.google.com/drive/1_n-QZyuP898JNaX7RDnCmw9lkibgEuP-).
 
-This notebook shows the steps to take to use the Astra DB Vector Store as a means to make LLM interactions meaningfull and without hallucinations. The approach taken here is Retrieval Augmented Generation.
+This notebook shows the steps to take to use the Astra DB Vector Store as a means to make LLM interactions meaningful and without hallucinations. The approach taken here is Retrieval Augmented Generation.
 
 You'll learn:
 
@@ -419,7 +418,91 @@ Now upload a PDF document (the more the merrier) that is relevant to you and sta
 
 ![end-result](./assets/end-result.png)
 
-## 1️⃣1️⃣ Let's deploy this cool stuff to Streamlit cloud!
+## 1️⃣1️⃣ Implement the app using Langflow for a code-free experience
+
+In this step, we'll implement the generative AI part of our application using **Langflow**. Langflow is a powerful tool that allows you to create and manage AI-driven workflows using a simple drag-and-drop interface, eliminating the need for code implementation.
+
+Switch to Langflow in Astra UI. Click on **Create New Project**.
+
+![langflow](./assets/langflow.jpg)
+
+Select the **Vector Store RAG** template.
+
+![langflow-new-project](./assets/langflow-new-project.jpg)
+
+This template includes two flows: 
+1. A vectorization flow (at the bottom), which is responsible for vectorizing content and storing it in Astra DB.
+2. A chat flow (at the top), which handles user interaction and retrieves relevant data from the vector store.
+
+![langflow-project](./assets/langflow-project.jpg)
+
+Configure the Vectorization Flow. We'll start by configuring the **vectorization flow**, which prepares our data for retrieval. 
+Configure the OpenAI Embeddings Component. 
+
+![langflow-vectorization-openai-embedding](./assets/langflow-vectorization-openai-embedding.jpg)
+
+Set the model to **text-embedding-3-small**.
+Provide your `OPENAI_API_KEY` by clicking on the icon to the right of the **OpenAI API Key** field. Adding a secret named `OPENAI_API_KEY`.
+
+![langflow-add-new-variable](./assets/langflow-add-new-variable.jpg)
+
+Configure the Astra DB Component. In the **Astra DB** component, configure the `ASTRA_DB_APPLICATION_TOKEN` and select your Astra DB instance. Create a new collection called `langflow`.  
+
+![langflow-vectorization-astra-db](./assets/langflow-vectorization-astra-db.jpg)
+
+Upload a PDF Document for Context. Use the **File** component to upload a PDF document. This document will be vectorized and stored in Astra DB. 
+
+![langflow-vectorization-file](./assets/langflow-vectorization-file.jpg)
+
+Execute the Vectorization Flow. Click the play button within the **Astra DB** component to execute the vectorization flow. This will split the document into chunks, generate vectors for each chunk, and store the chunks and vectors in Astra DB.
+
+![langflow-vectorization-execute](./assets/langflow-vectorization-execute.jpg)
+
+Once completed, all necessary data for our chatbot is stored in the `langflow` collection.
+
+![langflow-vectorization-collection](./assets/langflow-vectorization-collection.jpg)
+
+Now let's configure the **chat flow**, which handles user questions and retrieves context from the vector store. 
+
+Set up the **OpenAI Embeddings** component to use the same model (`text-embedding-3-small`) that was used for vectorization. This ensures consistency between the vectorized data and the question.
+
+![langflow-chat-openai-embedding](./assets/langflow-chat-openai-embedding.jpg)
+
+Configure the **Astra DB** component exactly as in the vectorization flow.
+
+![langflow-chat-astra-db](./assets/langflow-chat-astra-db.jpg)
+
+The **Prompt** component provides instructions to the language model. You don't need to modify anything here, but you can check the existing prompt template by clicking on the field.
+
+![langflow-chat-prompt](./assets/langflow-chat-prompt.jpg)
+
+Configure the OpenAI Component. Select an OpenAI model and configure the `OPENAI_API_KEY` 
+
+![langflow-chat-llm](./assets/langflow-chat-llm.jpg)
+
+Test the Flow in the Playground. Click the **Playground** button in the bottom right corner to open a chat dialog box where you can test the chatbot.
+
+![langflow-chat-playground](./assets/langflow-chat-playground.jpg)
+
+Integrate the Flow into Your chatbot application. Click the **API** button and copy the URL from the **RUN cURL** tab.
+
+![langflow-api](./assets/langflow-api.jpg)
+
+Paste this URL into the [app_langflow.py](./app_langflow.py) file. This file will serve as the UI layer of your app, and Langflow will handle the generative AI tasks.
+
+![langflow-code](./assets/langflow-code.jpg)
+
+Finally, run your Langflow-powered app [app_langflow.py](./app_langflow.py) application. 
+
+```bash
+streamlit run app_langflow.py
+```
+
+You now have a fully functioning chatbot application powered by Langflow with no need to write complex generative AI code! 🎉 
+
+![langflow-app](./assets/langflow-app.jpg)
+
+## 1️⃣2️⃣ Let's deploy this cool stuff to Streamlit cloud!
 In this step we'll deploy your awesome app to the internet so everyone can enjoy your cool work and be amazed!
 
 ### Set up your Streamlit account
