@@ -11,7 +11,7 @@ What you'll learn:
 - 👑 How to use [Streamlit](https://streamlit.io) to easily deploy your awesome app to the internet for everyone to see!
 - 🎉 How to use [Langflow](https://www.datastax.com/products/langflow). Simplify RAG and multi-agent application development with Langflow’s drag-and-drop IDE, rapid development, and one-click deployment at scale.
 
-- Slides of the presentation can be found [HERE](assets/meetups-slides.pdf)
+- Slides of the presentation can be found [HERE](assets/workshop-slides.pdf)
 
 
 
