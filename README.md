@@ -355,7 +355,7 @@ streamlit run app_6.py
 
 Now you'll see that the response will be written in real-time to the browser window.
 
-## 1️⃣0️⃣ Now let's make magic happen! 🦄
+## 1️⃣0️⃣ Enable users to upload own context  
 
 The ultimate goal of course is to add your own company's context to the agent. In order to do this, we'll add an upload box that allows you to upload PDF files which will then be used to provide a meaningfull and contextual response!
 
@@ -418,9 +418,9 @@ Now upload a PDF document (the more the merrier) that is relevant to you and sta
 
 ![end-result](./assets/end-result.png)
 
-## 1️⃣1️⃣ Implement the app using Langflow for a code-free experience
+## 1️⃣1️⃣ Now let's make magic happen! 🦄
 
-In this step, we'll implement the generative AI part of our application using **Langflow**. Langflow is a powerful tool that allows you to create and manage AI-driven workflows using a simple drag-and-drop interface, eliminating the need for code implementation.
+In this step, we'll implement the generative AI part of our chatbot using **Langflow**. Langflow is a powerful tool that allows you to create and manage AI-driven workflows using a simple drag-and-drop interface, eliminating the need for code implementation.
 
 Switch to Langflow in Astra UI. Click on **Create New Project**.
 
@@ -436,7 +436,7 @@ This template includes two flows:
 
 ![langflow-project](./assets/langflow-project.jpg)
 
-Configure the Vectorization Flow. We'll start by configuring the **vectorization flow**, which prepares our data for retrieval. 
+We'll start by configuring the **vectorization flow**, which prepares our data for retrieval. 
 Configure the OpenAI Embeddings Component. 
 
 ![langflow-vectorization-openai-embedding](./assets/langflow-vectorization-openai-embedding.jpg)
@@ -446,15 +446,15 @@ Provide your `OPENAI_API_KEY` by clicking on the icon to the right of the **Open
 
 ![langflow-add-new-variable](./assets/langflow-add-new-variable.jpg)
 
-Configure the Astra DB Component. In the **Astra DB** component, configure the `ASTRA_DB_APPLICATION_TOKEN` and select your Astra DB instance. Create a new collection called `langflow`.  
+In the **Astra DB** component, configure the `ASTRA_DB_APPLICATION_TOKEN` and select your Astra DB instance. Create a new collection called `langflow`.  
 
 ![langflow-vectorization-astra-db](./assets/langflow-vectorization-astra-db.jpg)
 
-Upload a PDF Document for Context. Use the **File** component to upload a PDF document. This document will be vectorized and stored in Astra DB. 
+Use the **File** component to upload a PDF document. This document will be vectorized and stored in Astra DB. 
 
 ![langflow-vectorization-file](./assets/langflow-vectorization-file.jpg)
 
-Execute the Vectorization Flow. Click the play button within the **Astra DB** component to execute the vectorization flow. This will split the document into chunks, generate vectors for each chunk, and store the chunks and vectors in Astra DB.
+Click the play button within the **Astra DB** component to execute the vectorization flow. This will split the document into chunks, generate vectors for each chunk, and store the chunks and vectors in Astra DB.
 
 ![langflow-vectorization-execute](./assets/langflow-vectorization-execute.jpg)
 
@@ -476,15 +476,15 @@ The **Prompt** component provides instructions to the language model. You don't 
 
 ![langflow-chat-prompt](./assets/langflow-chat-prompt.jpg)
 
-Configure the OpenAI Component. Select an OpenAI model and configure the `OPENAI_API_KEY` 
+Select an OpenAI model and configure the `OPENAI_API_KEY` 
 
 ![langflow-chat-llm](./assets/langflow-chat-llm.jpg)
 
-Test the Flow in the Playground. Click the **Playground** button in the bottom right corner to open a chat dialog box where you can test the chatbot.
+Click the **Playground** button in the bottom right corner to open a chat dialog box where you can test the chatbot.
 
 ![langflow-chat-playground](./assets/langflow-chat-playground.jpg)
 
-Integrate the Flow into Your chatbot application. Click the **API** button and copy the URL from the **RUN cURL** tab.
+Click the **API** button and copy the URL from the **RUN cURL** tab.
 
 ![langflow-api](./assets/langflow-api.jpg)
 
@@ -508,7 +508,7 @@ In this step we'll deploy your awesome app to the internet so everyone can enjoy
 ### Set up your Streamlit account
 If you have not do so before, please set up your account on Streamlit. When you already have an account skip to the next step and deploy the app.
 
-1. Head over to [Streamlit.io](https://streamlit.io) and clikc `Sign up`. Then select `Continue with Github`:
+1. Head over to [Streamlit.io](https://streamlit.io) and click `Sign up`. Then select `Continue with Github`:
 
     ![Streamlit](./assets/streamlit-0.png)
 
