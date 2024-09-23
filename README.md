@@ -1,5 +1,5 @@
 # Build Your Own RAG Chatbot
-Welcome to this workshop to build and deploy your own chatbot using Retrieval Augmented Generation with Astra DB and the OpenAI Chat Model.
+Welcome to this workshop to build and deploy your own chatbot using Retrieval Augmented Generation with Astra DB, Langflow and the OpenAI Chat Model.
 
 ![codespace](./assets/chatbot.png)
 
