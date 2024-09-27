@@ -103,9 +103,8 @@ if 'messages' not in st.session_state:
     st.session_state.messages = []
 
 # Draw a title and some markdown
-st.title("Your personal Efficiency Booster")
-st.markdown("""Generative AI is considered to bring the next Industrial Revolution.  
-Why? Studies show a **37% efficiency boost** in day to day work activities!""")
+st.title("Your React NextJS Booster")
+st.markdown(""" The React Handbook and The Next Handbook by Flavio is here. If you need additional content, add them using the left part""")
 
 # Include the upload form for new data to be Vectorized
 with st.sidebar:
