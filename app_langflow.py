@@ -9,7 +9,7 @@ def get_ai_response(message):
     token = st.secrets['ASTRA_TOKEN']
 
     # URL and headers
-    url = "https://api.langflow.astra.datastax.com/lf/cc011911-e624-4ec4-81d0-f1894f2dc9ce/api/v1/run/aa397a91-861f-400a-b301-fd9e1b29b89c?stream=false"
+    url = "https://api.langflow.astra.datastax.com/lf/aa351095-cc82-4a0a-9c99-739298e5ab5b/api/v1/run/dce5ff70-673e-4e16-bb78-1da3b0f3356b?stream=false"
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {token}'
